@@ -13,8 +13,16 @@ class PatientMemoryHooks(RunHooks):
         self, ctx: RunContextWrapper, agent: Agent
     ) -> None:
         """
-        get saved memories for agent on agent start
+        get saved memories for patient facing agent on agent start
         """
+
+        if agent.name != "Patient-Facing Agent":
+            return
+
+        # don't get the same memories multiple times
+        if "retrieved_memories" in ctx.context:
+            return
+
         patient_id = ctx.context.get("patient_id", "default")
         query = ctx.context.get("query", "")
 
@@ -27,6 +35,7 @@ class PatientMemoryHooks(RunHooks):
         memories = [m.get("memory") for m in results.get("results", [])]
         ctx.context["retrieved_memories"] = "\n".join(memories)
 
+    # TODO: replace this because it seems to be saving None right now. Might have to do a manual save.
     async def on_run_end(self, ctx: RunContextWrapper, output: str) -> None:
         """
         save the convo history on run-end.

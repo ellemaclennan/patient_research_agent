@@ -22,6 +22,8 @@ NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
 NEO4J_DATABASE = os.getenv("NEO4J_DATABASE")
 
+QDRANT_ENDPOINT = os.getenv("QDRANT_ENDPOINT")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
 config = {
     "version": "v1.1",
@@ -38,7 +40,11 @@ config = {
     },
     "vector_store": {
         "provider": "qdrant",
-        "config": {"host": "localhost", "port": 6333},
+        "config": {
+            "url": QDRANT_ENDPOINT,
+            "api_key": QDRANT_API_KEY,
+            "collection_name": "patient_memory",
+        },
     },
     "graph_store": {
         "provider": "neo4j",
