@@ -136,7 +136,12 @@ async def main():
         # uncomment this  to see the raw result with tool calls etc.
         # print(result.raw_responses)
 
+        # Elle don't forget, to_input_list() puts full convo in a list
+        # this is important for sesssion history and I should def use this in future agents
         history = result.to_input_list()
 
 
-asyncio.run(main())
+try:
+    asyncio.run(main())
+except (KeyboardInterrupt, EOFError):
+    print("\nGoodbye!")
