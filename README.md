@@ -31,7 +31,7 @@ Two memory stores via [mem0](https://github.com/mem0ai/mem0):
 
 | Store | Provider | Purpose |
 |---|---|---|
-| Vector | Qdrant Cloud | Semantic search over patient conversations |
+| Vector | Qdrant Cloud | Semantic search over patient conversations, and research articles |
 | Graph | Neo4j Aura | Relationship mapping between conditions, treatments, patients |
 
 **Push memory (hooks):** Patient context is automatically retrieved and injected into `patient_facing_agent`'s system prompt before each run via `PatientMemoryHooks.on_agent_start`.
